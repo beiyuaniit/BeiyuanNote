@@ -1,0 +1,385 @@
+GET _search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+GET _stats
+
+PUT shopping
+
+GET _cat/indices
+
+GET shopping
+
+GET _cat/indices?v
+
+DELETE shopping
+
+POST shopping/_doc/1001
+{
+ "title":"小米手机",
+ "category":"小米",
+ "images":"http://www.gulixueyuan.com/xm.jpg",
+ "price":3999.00
+}
+
+POST shopping/_doc/1002
+{
+ "title":"华为手机",
+ "category":"华为",
+ "images":"http://www.gulixueyuan.com/hw.jpg",
+ "price":4999.00
+}
+
+POST shopping/_doc/1003
+{
+ "title":"小米-mini",
+ "category":"小米",
+ "images":"http://www.gulixueyuan.com/xm.jpg",
+ "price":3999.00
+}
+
+POST shopping/_doc/1004
+{
+ "title":"苹果手机",
+ "category":"苹果",
+ "images":"http://www.gulixueyuan.com/hw.jpg",
+ "price":9999.00
+}
+
+GET shopping/_doc/1001
+
+GET shopping/_search
+
+# 全量覆盖 - 无论多次都是幂等性的
+PUT shopping/_doc/1001
+{
+ "title":"小米手机-plus",
+ "category":"小米",
+ "images":"http://www.gulixueyuan.com/xm.jpg",
+ "price":9999.00
+}
+
+GET shopping/_doc/1001
+
+# 局部更新
+POST shopping/_update/1001
+{
+  "doc": {
+    "title":"小米国际版"
+  }
+}
+
+GET shopping/_doc/1001
+
+
+GET shopping/_search?q=category:小米
+
+GET shopping/_search
+{
+  "query": {
+    "match": {
+      "category": "小米"
+    }
+  }
+}
+
+
+GET shopping/_search
+{
+  "query": {
+    "match_all": {}
+  }, 
+  "from": 0,
+  "size": 3,
+  "_source": ["title","price"],
+  "sort": [
+    {
+      "price": {
+        "order": "desc"
+      }
+    }
+  ]
+}
+
+# 多条件,一个match只支持一个filed
+# and
+GET  shopping/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "category": "小米"
+          }
+        },
+        {
+          "match": {
+            "price": 3999.0
+          }
+        }
+      ]
+    }
+  }
+}
+
+# or
+
+GET  shopping/_search
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "match": {
+            "category": "小米"
+          }
+        },
+        {
+          "match": {
+            "category": "华为"
+          }
+        }
+      ],
+      "filter": [
+        {
+          "range": {
+            "price": {
+              "gte": 3000,
+              "lte": 7000
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+# 模糊查询，分词后进行匹配
+GET shopping/_search
+{
+  "query": {
+    "match": {
+      "category": "米"
+    }
+  }
+}
+
+GET shopping/_search
+{
+  "query": {
+    "match": {
+      "category": "小华"
+    }
+  }
+}
+
+# 对查询不分词，但是数据库那边还是分词的
+GET shopping/_search
+{
+  "query": {
+    "match_phrase": {
+      "title": "小米"
+    }
+  }
+}
+
+# 无条件查询
+GET shopping/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+# 高亮查询，html的高亮
+GET shopping/_search
+{
+  "query": {
+    "match": {
+      "category": "小米"
+    }
+  },
+  "highlight": {
+    "fields": {
+      "category": {}
+    }
+  }
+}
+
+# 聚合操作
+# 分组，组名自定义
+# 后面的size:0 就是不用查询原始数据
+# terms 分组
+GET shopping/_search
+{
+  "aggs": {
+    "price_group": {  
+      "terms": {
+        "field": "price",
+        "size": 10
+      }
+    }
+  },
+  "size": 0
+}
+
+
+GET shopping/_search
+{
+  "aggs": {
+    "price_avg": {  
+      "avg": {
+        "field": "price"
+      }
+    }
+  },
+  "size": 0
+}
+
+PUT user
+
+# 关键词类型（keyword不再分词）、是否走索引
+PUT user/_mapping
+{
+  "properties":
+  {
+    "name":
+    {
+      "type":"text",
+      "index":true
+    },
+    "sex":
+    {
+      "type":"keyword",
+      "index":true
+    },
+    "tel":
+    {
+      "type":"keyword",
+      "index":false
+    }
+  }
+}
+
+# 默认是_doc
+POST user/_create/1001
+{
+  "name":"小米",
+  "sex":"男的",
+  "tel":2333
+}
+
+GET user/_search
+{
+  "query": {
+    "match": {
+      "name": "米"
+    }
+  }
+}
+
+GET user/_search
+{
+  "query": {
+    "match": {
+      "sex": "男"
+    }
+  }
+}
+
+DELETE user
+
+GET _cat/indices
+
+GET user/_search
+
+PUT users
+{
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 1
+  }
+}
+
+GET users
+
+GET _analyze
+{
+ "analyzer": "standard",
+ "text": "Text to analyze"
+}
+
+GET _analyze
+{
+ "analyzer": "standard",
+ "text": "我们的爱，就行秋叶等不到花开"
+}
+
+GET _analyze
+{
+ "analyzer": "ik_smart",
+ "text": "可是雨后太阳呢"
+}
+
+GET _analyze
+{
+  "analyzer": "ik_max_word",
+  "text": "我们的爱，就像秋叶等不到花开"
+}
+
+GET _analyze
+{
+  "analyzer": "ik_max_word",
+  "text": "弗雷尔卓德"
+}
+
+# 设置索引的分词器
+PUT my_index
+{
+    "settings": {
+        "analysis": {
+            "char_filter": {
+                "&_to_and": {
+                    "type": "mapping",
+                    "mappings": [
+                        "&=> and "
+                    ]
+                }
+            },
+            "filter": {
+                "my_stopwords": {
+                    "type": "stop",
+                    "stopwords": [
+                        "the",
+                        "a"
+                    ]
+                }
+            },
+            "analyzer": {
+                "my_analyzer": {
+                    "type": "custom",
+                    "char_filter": [
+                        "html_strip",
+                        "&_to_and"
+                    ],
+                    "tokenizer": "standard",
+                    "filter": [
+                        "lowercase",
+                        "my_stopwords"
+                    ]
+                }
+            }
+        }
+    }
+}
+
+
+GET my_index/_analyze
+{
+ "text":"The quick & brown fox",
+ "analyzer": "my_analyzer"
+}

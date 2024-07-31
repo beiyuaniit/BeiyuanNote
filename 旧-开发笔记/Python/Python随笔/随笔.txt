@@ -1,0 +1,64 @@
+-人生苦短，我用Python
+
+-解释器：编译一句提交给系统执行一句
+ 编译器：编译所有提交给系统执行所有
+ 
+-同一个项目，Python代码量约为java的1/5
+
+-完全面向对象的语言
+
+-cmd中运行代码
+	python name.py
+	和java一样，只不过不用编译而已
+	清屏
+		import os
+		os.system("cls")
+	返回上一条代码
+		向上方向键
+	
+-退出
+	exit()
+-一般来说每行只能写一行代码，不然报错，一些特殊语句例外
+
+-Python3支持中文
+
+-Python解释器版本
+	CPython		官方，C语言实现
+	JPython		运行在java平台
+	IronPython	.NET和Mono平台
+	PyPy		PYthon实现
+	
+
+-交互式运行Python
+	cmd->python进入shell
+	在Python的shell中运行
+	退出shell
+		exit或者Ctrl+Z
+		
+-注释
+	单行
+		#
+	多行
+		"""    """
+		'''    '''
+-算数运算符
+	加+	减-	乘*
+	除/	取整除//
+	取余%	幂**
+	
+-特殊
+	*
+		还可以用来重复输出字符串
+		'ab'*21
+	+
+		还可以用来拼接字符串
+		'ab'+'ad'
+	
+-程序用来处理数据的
+ 变量是用来存储数据的
+
+-Python中变量
+	赋值后才会被创建
+	也就是说定义后要赋值（目前来看是这样的）
+	输出变量
+		print（name）

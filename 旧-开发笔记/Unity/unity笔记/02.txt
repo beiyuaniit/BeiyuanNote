@@ -1,0 +1,17 @@
+-01
+	父子对象的关系
+	子物体的位置是相对父对象的位置
+	Reset重置
+	组件一般往父对象身上挂
+
+-02
+	在Project创建Material
+	添加Material到对象的Mesh Renderer中Material中的Element
+	可在New Metarial
+		Rendering修改渲染模式	
+		Shader修改渲染器
+	颜色Albedo
+	贴图Albedo
+	金属光泽Metallic
+
+-03

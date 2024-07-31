@@ -1,0 +1,49 @@
+-01-05
+-注：
+	左键用L表示，右键用R表示，按住用A/表示
+-整体布局		
+	右上角的Layout
+
+-Project视图单列显示
+	Project+right+One Column Layout
+	
+-面板介绍
+	Project
+		存放项目资源，对应的是Assets文件夹
+		可以在外部直接修改Assets文件夹（一般不这样做）
+		导入资源：
+			可以直接把外部资源文件（夹）直接点击鼠标拖到这里
+				是unitypackage可以有选择地导入
+		导出unitypackage
+			Proje视图+R+Export Package
+	Hierarchy
+		层级面板
+		存放游戏对象
+		创建游戏对象
+			把Project中的资源拖到该视图即可
+			游戏对象在运行可见，游戏资源看不到
+		Ctrl+D：直接拷贝对象
+	Scene
+		操作游戏对象
+		A/R或者Alt+L：旋转
+		滚轮：前进后退		
+		A/滚轮：拖拽对象视角	
+		选中对象+F：把对象居中
+		A/Alt+R+滚轮:放大缩小
+		顶点吸附：
+			选中+V+选中顶点+拖拽（实现面和面的无缝对接）
+		
+	Game    
+		游戏预览
+		
+	Inspector
+		检视面板：属性和组件
+		一个三角是一个组件
+		组件
+			Transform
+				Position：世界坐标位置
+				Rotation：旋转角度
+				Scale：放缩比例
+					美工做出的模型一般是1:1：1
+					
+				

@@ -1,0 +1,67 @@
+-Debug
+	插入断点（程序停下的地方）
+		点击代码左侧空白
+	运行图标旁边的爬虫图标(Shift+F9)
+	点击控制台的向左下方箭头执行一句
+	Console窗口
+		看到输出
+	DeBug
+		看到过程量（变量）
+	
+	
+-运行当前源文件
+	Alt+Shift+F10
+
+
+-运行上一次的源文件
+	Shift+F10
+	
+	
+-关闭其他窗口
+	右键.py窗口+Close  Others
+	
+	
+-设置开头注释
+	File->Setting->Editor->File and Code Templates->File->Python Script
+		#-*- coding = utf-8 -*-
+		#@Time :2021/9/11 11:06
+		#@Author :beiyuan
+		#@File :_01概述.py
+		#@Software:PyCharm
+		
+	
+-查看当前项目库和安装新的库
+	File->Setting->Project:项目名->Python interpreter
+		新的库直接双击后查看可用库后安装即可
+
+
+-设置注释颜色
+	File->Setting->Editor->Color Scheme->Python->Line Comment
+	
+
+-F12
+	返回上一个窗口
+	
+	
+-ESC
+	回到编辑界面
+	
+-Win
+	+向下/向上		小/大化应用
+	+数字			打开应用
+	
+	+D				选中应用，回车打开
+	
+	
+-Alt+Tab
+	切换打开的应用
+	
+	
+-Ctrl+Alt+L
+	格式化代码
+		用来解决requests返回html代码格式不对的问题
+		在.html用这个快捷键即可
+	
+	
+-在pyCharm直接对文件夹更名的话，曾经引用过该文件的代码也会修改为新名字，真的太6了
+	
